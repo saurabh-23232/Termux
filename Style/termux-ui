@@ -1,0 +1,47 @@
+import os
+import sys
+from colorama import Fore, Back, Style, init
+
+# Initialize Colorama
+init(autoreset=True)
+
+# Function to clear the screen
+def clear_screen():
+    os.system('clear')
+
+# Function to display the banner
+def display_banner():
+    clear_screen()
+    print(Fore.BLUE + "┌──────────────────────────────────────────────────┐")
+    print(Fore.BLUE + "│" + Fore.RED + "░▀█▀░█▀▀░█▀▄░█▄█░█░█░█░█" + Fore.ORANGE + "░░░░░" + Fore.GREEN + "█▀▀░▀█▀░█░█░█░░░█▀▀░░" + Fore.BLUE + "│")
+    print(Fore.BLUE + "│" + Fore.RED + "░░█░░█▀▀░█▀▄░█░█░█░█░▄▀▄" + Fore.ORANGE + "░▄▄▄" + Fore.RED + "░" + Fore.GREEN + "▀▀█░░█░░░█░░█░░░█▀▀░░" + Fore.BLUE + "│")
+    print(Fore.BLUE + "│" + Fore.RED + "░░▀░░▀▀▀░▀░▀░▀░▀░▀▀▀░▀░▀" + Fore.ORANGE + "░░░░░" + Fore.GREEN + "▀▀▀░░▀░░░▀░░▀▀▀░▀▀▀░░" + Fore.BLUE + "│")
+    print(Fore.BLUE + "└──────────────────────────────────────────────────┘")
+    print(Fore.BLUE + "[" + Fore.RED + "*" + Fore.BLUE + "] " + Fore.ORANGE + "Devil Hacker")
+
+# Function to display menu options
+def display_menu():
+    print(Fore.GREEN + "\nAvailable Options:")
+    print(Fore.YELLOW + "1. Option 1")
+    print(Fore.YELLOW + "2. Option 2")
+    print(Fore.YELLOW + "3. Exit")
+
+# Main function
+def main():
+    display_banner()
+    display_menu()
+
+    while True:
+        choice = input(Fore.CYAN + "\nSelect an option: ")
+        if choice == '1':
+            print(Fore.GREEN + "You selected Option 1!")
+        elif choice == '2':
+            print(Fore.GREEN + "You selected Option 2!")
+        elif choice == '3':
+            print(Fore.RED + "Exiting...")
+            sys.exit(0)
+        else:
+            print(Fore.RED + "Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
