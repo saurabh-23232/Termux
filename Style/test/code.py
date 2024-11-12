@@ -8,11 +8,11 @@ def display_banner():
     banner = """
 \033[1;35m
 ________              .__.__      ___ ___                __   .__                
-\______ \   _______  _|__|  |    /   |   \_____    ____ |  | _|__| ____    ____  
- |    |  \_/ __ \  \/ /  |  |   /    ~    \__  \ _/ ___\|  |/ /  |/    \  / ___\ 
- |    `   \  ___/\   /|  |  |__ \    Y    // __ \\  \___|    <|  |   |  \/ /_/  >
-/_______  /\___  >\_/ |__|____/  \___|_  /(____  /\___  >__|_ \__|___|  /\___  / 
-        \/     \/                      \/      \/     \/     \/       \//_____/   
+\\______ \\   _______  _|__|  |    /   |   \\_____    ____ |  | _|__| ____    ____  
+ |    |  \\_/ __ \\  \\/ /  |  |   /    ~    \\__  \\ _/ ___\\|  |/ /  |/    \\  / ___\\ 
+ |    `   \\  ___/\\   /|  |  |__ \\    Y    // __ \\\\  \\___|    <|  |   |  \\/ /_/  >
+/_______  /\\___  >\\_/ |__|____/  \\___|_  /(____  /\\___  >__|_ \\__|___|  /\\___  / 
+        \\/     \\/                      \\/      \\/     \\/     \\/       \//_____/   
 \033[0m
     """
     print(banner)
@@ -26,9 +26,17 @@ def set_custom_prompt():
     """Set a custom shell prompt to show user@hostname ~ in green."""
     custom_prompt = '\033[38;5;10m[\u@\h \W]\$ '  # Green prompt
     
-    # Modify the .bashrc to set the PS1 variable with the custom prompt
-    with open(os.path.expanduser('~/.bashrc'), 'a') as f:
-        f.write(f'\nPS1="{custom_prompt}"\n')  # Append the custom prompt to .bashrc
+    # Get the correct home directory for the current user
+    home_dir = os.path.expanduser('~')  # Correct home directory
+    bashrc_path = os.path.join(home_dir, '.bashrc')  # Path to the .bashrc file
+
+    try:
+        # Append the custom prompt to the user's .bashrc
+        with open(bashrc_path, 'a') as f:
+            f.write(f'\nPS1="{custom_prompt}"\n')  # Append custom prompt to .bashrc
+    except PermissionError:
+        print(f"Permission error: Unable to write to {bashrc_path}. Ensure you have proper permissions.")
+        exit(1)
 
 def clear_screen():
     """Clear the screen to apply changes."""
