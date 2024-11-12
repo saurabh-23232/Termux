@@ -1,7 +1,6 @@
 import os
 
 # Set UTF-8 encoding (important for emoji handling)
-# The line below is a comment and just for clarity if working in an older Python version
 # -*- coding: utf-8 -*-
 
 def display_banner():
@@ -25,29 +24,18 @@ def set_black_background():
 
 def set_custom_prompt():
     """Set a custom shell prompt to show user@hostname ~ in green."""
-    custom_prompt = "\033[38;5;10m[\u@\h \W]\$ "  # Green prompt
+    custom_prompt = '\033[38;5;10m[\u@\h \W]\$ '  # Green prompt
+    
+    # Modify the .bashrc to set the PS1 variable with the custom prompt
     with open(os.path.expanduser('~/.bashrc'), 'a') as f:
-        f.write(f'\nPS1="{custom_prompt}"\n')  # Add custom prompt to .bashrc
-
-def place_icon_at_top_right():
-    """Place the 😈 icon at the top-right corner of the terminal."""
-    # Get the terminal size
-    rows, columns = os.popen('stty size', 'r').read().split()
-    rows = int(rows)
-    columns = int(columns)
-
-    # Unicode for the "😈" emoji (using escape sequence)
-    icon = "\U0001F608"  # Unicode for the '😈' emoji
-
-    # Print the icon at the top-right corner
-    print(f"\033[{1};{columns}H{icon}", end="")  # Move cursor and print icon at top-right
+        f.write(f'\nPS1="{custom_prompt}"\n')  # Append the custom prompt to .bashrc
 
 def clear_screen():
     """Clear the screen to apply changes."""
     os.system("clear")
 
 def apply_theme():
-    """Apply the full theme: black background, custom prompt, top-right icon, and banner."""
+    """Apply the full theme: black background, custom prompt, and banner."""
     # Display the banner
     display_banner()
 
@@ -59,9 +47,6 @@ def apply_theme():
 
     # Clear the terminal screen to apply the background color
     clear_screen()
-
-    # Place the icon at the top-right corner
-    place_icon_at_top_right()
 
     # Reset the colors back to normal
     print("\033[0m")
